@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 @Entity
-@Builder
-@NoArgsConstructor
 public class BebidaAlcoolica extends Bebida {
 
-
+    BebidaAlcoolica(Long id, Double preco, String nome, Double volume, String tipo) {
+        super(id, preco, nome, volume, tipo);
+    }
 }

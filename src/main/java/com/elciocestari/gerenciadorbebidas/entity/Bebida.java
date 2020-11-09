@@ -1,12 +1,18 @@
 package com.elciocestari.gerenciadorbebidas.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bebida {
 
     @Id
@@ -21,4 +27,7 @@ public class Bebida {
 
     @Column(nullable = false)
     private Double volume;
+
+    @Column(nullable = false)
+    private String tipo;
 }

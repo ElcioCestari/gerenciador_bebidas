@@ -1,29 +1,28 @@
 package com.elciocestari.gerenciadorbebidas.controller;
 
+import com.elciocestari.gerenciadorbebidas.dto.BebidaDTO;
 import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
-import com.elciocestari.gerenciadorbebidas.entity.Bebida;
-import com.elciocestari.gerenciadorbebidas.repository.BebidaRepository;
+import com.elciocestari.gerenciadorbebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequestMapping("/api/v1/bebida")
 @RestController
 public class BebidaController {
 
-    private BebidaRepository bebidaRepository;
+    private BebidaService bebidaService;
 
     @Autowired
-    public BebidaController(BebidaRepository bebidaRepository) {
-        this.bebidaRepository = bebidaRepository;
+    public BebidaController(BebidaService bebidaService) {
+        this.bebidaService = bebidaService;
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Bebida bebida) {
-        Bebida bebidaSaved = bebidaRepository.save(bebida);
+    public MessageResponseDTO create(@RequestBody @Valid BebidaDTO bebidaDTO) {
 
-        return MessageResponseDTO.builder()
-                .message("Bebida adicionada ao estoque com id " + bebidaSaved.getId())
-                .build();
+        return bebidaService.create(bebidaDTO);
     }
 
 }
