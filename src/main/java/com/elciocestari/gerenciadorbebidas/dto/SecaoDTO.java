@@ -1,34 +1,31 @@
 package com.elciocestari.gerenciadorbebidas.dto;
 
+import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BebidaDTO {
+public class SecaoDTO {
 
     private Long id;
 
     @NotBlank
-    @Size(max = 256)
     private String nome;
-
-    @NotNull
-    private Double preco;
 
     @NotNull
     private Double volume;
 
-    @NotNull
-    @NotBlank
-    private String tipo;
+    @Valid
+    private List<BebidaDTO> bebida;
 
 }

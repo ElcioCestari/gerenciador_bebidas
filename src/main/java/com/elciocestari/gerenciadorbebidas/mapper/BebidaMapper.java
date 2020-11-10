@@ -2,6 +2,7 @@ package com.elciocestari.gerenciadorbebidas.mapper;
 
 import com.elciocestari.gerenciadorbebidas.dto.BebidaDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,4 +14,5 @@ public interface BebidaMapper {
     Bebida toModel(BebidaDTO bebidaDTO);
 
     BebidaDTO toDTO(Bebida bebida);
+
 }

@@ -1,0 +1,16 @@
+package com.elciocestari.gerenciadorbebidas.mapper;
+
+import com.elciocestari.gerenciadorbebidas.dto.SecaoDTO;
+import com.elciocestari.gerenciadorbebidas.entity.Secao;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface SecaoMapper {
+
+    SecaoMapper INSTANCE = Mappers.getMapper(SecaoMapper.class);
+
+    Secao toModel(SecaoDTO secaoDTO);
+
+    SecaoDTO toDto(Secao secao);
+}

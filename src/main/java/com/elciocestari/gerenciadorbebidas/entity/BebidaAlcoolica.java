@@ -1,10 +1,11 @@
 package com.elciocestari.gerenciadorbebidas.entity;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
+
+
+@Deprecated
 @Entity
 public class BebidaAlcoolica extends Bebida {
 

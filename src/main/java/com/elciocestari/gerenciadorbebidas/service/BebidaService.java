@@ -7,8 +7,6 @@ import com.elciocestari.gerenciadorbebidas.mapper.BebidaMapper;
 import com.elciocestari.gerenciadorbebidas.repository.BebidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class BebidaService {
@@ -25,10 +23,6 @@ public class BebidaService {
     public MessageResponseDTO create( BebidaDTO bebidaDTO) {
 
         Bebida bebidaParaSalvar = bebidaMapper.toModel(bebidaDTO);
-
-
-
-
 
         Bebida bebidaSalva = bebidaRepository.save(bebidaParaSalvar);
 

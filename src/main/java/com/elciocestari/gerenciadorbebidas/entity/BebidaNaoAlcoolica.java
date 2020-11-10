@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
+@Deprecated
 @Entity
 public class BebidaNaoAlcoolica extends Bebida{
 
