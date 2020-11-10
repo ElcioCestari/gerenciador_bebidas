@@ -41,12 +41,11 @@ public class SecaoController {
 
     @PutMapping(value = "/{id}")
     public Secao update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable long id) {
-
         return secaoService.update(secaoDTO,id);
     }
 
-    @DeleteMapping
-    public MessageResponseDTO delete() {
-        return secaoService.delete();
+    @DeleteMapping(value = "/{id}")
+    public MessageResponseDTO delete(@PathVariable long id) {
+        return secaoService.delete(id);
     }
 }
