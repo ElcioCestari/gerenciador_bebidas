@@ -5,6 +5,7 @@ import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,8 +23,7 @@ public class BebidaController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody @Valid BebidaDTO bebidaDTO) {
-
+    public Bebida create(@RequestBody @Valid BebidaDTO bebidaDTO) {
         return bebidaService.create(bebidaDTO);
     }
 
@@ -32,4 +32,13 @@ public class BebidaController {
         return bebidaService.getAll();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable("id") long id, @RequestBody @Valid BebidaDTO bebidaDTO){
+        return bebidaService.update(id, bebidaDTO );
+    }
+
+    @DeleteMapping("/{id}")
+    public MessageResponseDTO delete(@PathVariable("id") long id){
+        return bebidaService.delete(id);
+    }
 }

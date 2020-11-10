@@ -32,7 +32,6 @@ public class SecaoService {
     }
 
     public Secao update(SecaoDTO secaoDTO, long id) {
-
         Optional<Secao> secaoOptional = this.getById(id);
 
         if (!secaoOptional.isPresent()) return null;
