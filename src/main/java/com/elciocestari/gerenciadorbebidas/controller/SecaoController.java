@@ -7,6 +7,7 @@ import com.elciocestari.gerenciadorbebidas.entity.Secao;
 import com.elciocestari.gerenciadorbebidas.mapper.BebidaMapper;
 import com.elciocestari.gerenciadorbebidas.mapper.SecaoMapper;
 import com.elciocestari.gerenciadorbebidas.repository.SecaoRepository;
+import com.elciocestari.gerenciadorbebidas.service.SecaoService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,24 +22,17 @@ import java.util.Map;
 @RestController
 public class SecaoController {
 
-    private SecaoRepository secaoRepository;
-
-    private final SecaoMapper secaoMapper = SecaoMapper.INSTANCE;
+    private SecaoService secaoService;
 
     @Autowired
-    public SecaoController(SecaoRepository secaoRepository) {
-        this.secaoRepository = secaoRepository;
+    public SecaoController(SecaoService secaoService) {
+        this.secaoService = secaoService;
     }
 
     @PostMapping
     public MessageResponseDTO save(@RequestBody @Valid SecaoDTO secaoDTO) {
 
-        Secao secaoToSave = secaoMapper.toModel(secaoDTO);
-        Secao secaoSalva = secaoRepository.save(secaoToSave);
-
-        return MessageResponseDTO.builder()
-                .message("Secao salva com os dados " + secaoSalva.toString())
-                .build();
+        return secaoService.create(secaoDTO);
     }
 
     @GetMapping
