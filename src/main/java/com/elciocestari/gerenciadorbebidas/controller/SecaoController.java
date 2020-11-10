@@ -30,12 +30,23 @@ public class SecaoController {
     }
 
     @PostMapping
-    public MessageResponseDTO save(@RequestBody @Valid SecaoDTO secaoDTO) {
+    public Secao save(@RequestBody @Valid SecaoDTO secaoDTO) {
         return secaoService.create(secaoDTO);
     }
 
     @GetMapping
     public List<Secao> get() {
         return secaoService.getAll();
+    }
+
+    @PutMapping(value = "/{id}")
+    public Secao update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable long id) {
+
+        return secaoService.update(secaoDTO,id);
+    }
+
+    @DeleteMapping
+    public MessageResponseDTO delete() {
+        return secaoService.delete();
     }
 }

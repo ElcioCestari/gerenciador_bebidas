@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SecaoService {
@@ -21,17 +22,35 @@ public class SecaoService {
         this.secaoRepository = secaoRepository;
     }
 
-    public MessageResponseDTO create(SecaoDTO secaoDTO){
+    public Secao create(SecaoDTO secaoDTO) {
 
         Secao secaoToSave = secaoMapper.toModel(secaoDTO);
-        Secao secaoSalva = secaoRepository.save(secaoToSave);
+        return secaoRepository.save(secaoToSave);
 
-        return MessageResponseDTO.builder()
-                .message(secaoSalva.toString())
-                .build();
     }
 
-    public List<Secao> getAll(){
+    public List<Secao> getAll() {
         return secaoRepository.findAll();
+    }
+
+    //TODO
+    public Secao update(SecaoDTO secaoDTO, long id) {
+
+        Optional<Secao> secaoOptional = this.getById(id);
+
+        if (!secaoOptional.isPresent()) return null;
+
+        secaoDTO.setId(id);
+
+        return this.create(secaoDTO);
+
+    }
+
+    public Optional<Secao> getById(long id) {
+        return secaoRepository.findById(id);
+    }
+
+    public MessageResponseDTO delete() {
+        return null;
     }
 }
