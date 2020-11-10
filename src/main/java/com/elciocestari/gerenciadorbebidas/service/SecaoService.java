@@ -8,6 +8,8 @@ import com.elciocestari.gerenciadorbebidas.repository.SecaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SecaoService {
 
@@ -27,5 +29,9 @@ public class SecaoService {
         return MessageResponseDTO.builder()
                 .message(secaoSalva.toString())
                 .build();
+    }
+
+    public List<Secao> getAll(){
+        return secaoRepository.findAll();
     }
 }

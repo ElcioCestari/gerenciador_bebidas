@@ -31,13 +31,11 @@ public class SecaoController {
 
     @PostMapping
     public MessageResponseDTO save(@RequestBody @Valid SecaoDTO secaoDTO) {
-
         return secaoService.create(secaoDTO);
     }
 
     @GetMapping
-    public MessageResponseDTO get() {
-
-        return MessageResponseDTO.builder().message("testando").build();
+    public List<Secao> get() {
+        return secaoService.getAll();
     }
 }

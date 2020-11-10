@@ -8,6 +8,9 @@ import com.elciocestari.gerenciadorbebidas.repository.BebidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BebidaService {
 
@@ -20,7 +23,7 @@ public class BebidaService {
         this.bebidaRepository = bebidaRepository;
     }
 
-    public MessageResponseDTO create( BebidaDTO bebidaDTO) {
+    public MessageResponseDTO create(BebidaDTO bebidaDTO) {
 
         Bebida bebidaParaSalvar = bebidaMapper.toModel(bebidaDTO);
 
@@ -29,5 +32,10 @@ public class BebidaService {
         return MessageResponseDTO.builder()
                 .message("Bebida adicionada ao estoque com id " + bebidaSalva.getId().toString())
                 .build();
+    }
+
+    public List<Bebida> getAll() {
+
+        return bebidaRepository.findAll();
     }
 }
