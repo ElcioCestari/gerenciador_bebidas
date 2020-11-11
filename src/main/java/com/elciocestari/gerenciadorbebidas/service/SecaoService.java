@@ -32,32 +32,20 @@ public class SecaoService {
     }
 
     public Secao update(SecaoDTO secaoDTO, long id) {
-        Optional<Secao> secaoOptional = this.getById(id);
+        return secaoRepository.findById(id)
+                        .map(secao -> {
+                            secao = secaoMapper.toModel(secaoDTO);
+                            secao.setId(id);
+                            return secaoRepository.save(secao);
+                        }).orElse(null);
 
-        if (!secaoOptional.isPresent()) return null;
-
-        secaoDTO.setId(id);
-
-        return this.create(secaoDTO);
     }
 
-    public Optional<Secao> getById(long id) {
-        return secaoRepository.findById(id);
-    }
-
-    public MessageResponseDTO delete(long id) {
-
-       Optional<Secao> secaoOptional =  this.getById(id);
-
-       if(!secaoOptional.isPresent()) {
-           return MessageResponseDTO.builder()
-                   .message("secao nao encontrada com o id: " + id)
-                   .build();
-       }
-
-        secaoRepository.deleteById(id);
-        return MessageResponseDTO.builder()
-                .message("secao deletada")
-                .build();
+    public Boolean delete(long id) {
+        return secaoRepository.findById(id)
+                .map(secao -> {
+                    secaoRepository.deleteById(id);
+                    return true;
+                }).orElse(false);
     }
 }

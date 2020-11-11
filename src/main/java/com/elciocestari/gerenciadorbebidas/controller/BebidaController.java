@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequestMapping("/api/v1/bebida")
 @RestController
-public class BebidaController {
+public class BebidaController{
 
     private BebidaService bebidaService;
 
@@ -48,7 +48,7 @@ public class BebidaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") long id) {
+    public ResponseEntity delete( long id) {
         return bebidaService.delete(id) ?
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();

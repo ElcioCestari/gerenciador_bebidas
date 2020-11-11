@@ -10,6 +10,7 @@ import com.elciocestari.gerenciadorbebidas.repository.SecaoRepository;
 import com.elciocestari.gerenciadorbebidas.service.SecaoService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,22 +31,33 @@ public class SecaoController {
     }
 
     @PostMapping
-    public Secao save(@RequestBody @Valid SecaoDTO secaoDTO) {
-        return secaoService.create(secaoDTO);
+    public ResponseEntity save(@RequestBody @Valid SecaoDTO secaoDTO) {
+        Secao secaoSalva = secaoService.create(secaoDTO);
+
+        return ResponseEntity.ok(secaoSalva);
     }
 
     @GetMapping
-    public List<Secao> get() {
-        return secaoService.getAll();
+    public ResponseEntity get() {
+        List<Secao> list = secaoService.getAll();
+        return list.size() > 0 ?
+                ResponseEntity.ok(list) :
+                ResponseEntity.notFound().build();
     }
 
     @PutMapping(value = "/{id}")
-    public Secao update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable long id) {
-        return secaoService.update(secaoDTO,id);
+    public ResponseEntity update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable long id) {
+        Secao secaoUdpated = secaoService.update(secaoDTO, id);
+
+        return secaoUdpated != null ?
+                ResponseEntity.ok(secaoUdpated) :
+                ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "/{id}")
-    public MessageResponseDTO delete(@PathVariable long id) {
-        return secaoService.delete(id);
+    public ResponseEntity delete(@PathVariable long id) {
+        return secaoService.delete(id) ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.notFound().build();
     }
 }

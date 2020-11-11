@@ -27,13 +27,6 @@ public class BebidaService {
     public Bebida create(BebidaDTO bebidaDTO) {
         Bebida bebidaParaSalvar = bebidaMapper.toModel(bebidaDTO);
 
-/*
-        //TODO tive que fazer esse mapeamento pois,
-        // por algum motivo que nao tenho como resolver agora,
-        // bebidaMapper nao esta adicionando somente o id.
-        bebidaParaSalvar.setId(bebidaDTO.getId());
-*/
-
         Bebida bebidaSalva = bebidaRepository.save(bebidaParaSalvar);
 
         return bebidaSalva;
@@ -50,10 +43,6 @@ public class BebidaService {
                     bebida.setId(id);
                     return bebidaRepository.save(bebida);
                 }).orElse(null);
-    }
-
-    private Optional<Bebida> getById(long id) {
-        return bebidaRepository.findById(id);
     }
 
     public boolean delete(long id) {
