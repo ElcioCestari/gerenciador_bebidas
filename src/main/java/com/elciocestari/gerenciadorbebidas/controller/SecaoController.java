@@ -4,6 +4,7 @@ import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.dto.SecaoDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.entity.Secao;
+import com.elciocestari.gerenciadorbebidas.exception.NumeroMaximoDeSecaoException;
 import com.elciocestari.gerenciadorbebidas.mapper.BebidaMapper;
 import com.elciocestari.gerenciadorbebidas.mapper.SecaoMapper;
 import com.elciocestari.gerenciadorbebidas.repository.SecaoRepository;
@@ -31,7 +32,7 @@ public class SecaoController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody @Valid SecaoDTO secaoDTO) {
+    public ResponseEntity save(@RequestBody @Valid SecaoDTO secaoDTO) throws NumeroMaximoDeSecaoException {
         Secao secaoSalva = secaoService.create(secaoDTO);
 
         return ResponseEntity.ok(secaoSalva);
