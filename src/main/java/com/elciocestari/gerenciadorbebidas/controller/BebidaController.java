@@ -44,7 +44,7 @@ public class BebidaController{
         Bebida bebida = bebidaService.update(id, bebidaDTO);
 
         if (bebida != null) return ResponseEntity.ok(bebida);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

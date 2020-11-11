@@ -42,7 +42,7 @@ public class SecaoController {
         List<Secao> list = secaoService.getAll();
         return list.size() > 0 ?
                 ResponseEntity.ok(list) :
-                ResponseEntity.notFound().build();
+                ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
