@@ -27,10 +27,12 @@ public class BebidaService {
     public Bebida create(BebidaDTO bebidaDTO) {
         Bebida bebidaParaSalvar = bebidaMapper.toModel(bebidaDTO);
 
+/*
         //TODO tive que fazer esse mapeamento pois,
         // por algum motivo que nao tenho como resolver agora,
         // bebidaMapper nao esta adicionando somente o id.
         bebidaParaSalvar.setId(bebidaDTO.getId());
+*/
 
         Bebida bebidaSalva = bebidaRepository.save(bebidaParaSalvar);
 
@@ -41,25 +43,24 @@ public class BebidaService {
         return bebidaRepository.findAll();
     }
 
-    public ResponseEntity update(long id, BebidaDTO bebidaDTO) {
+    public Bebida update(long id, BebidaDTO bebidaDTO) {
         return bebidaRepository.findById(id)
                 .map(bebida -> {
                     bebida = bebidaMapper.toModel(bebidaDTO);
                     bebida.setId(id);
-                    Bebida bebidaSalva = bebidaRepository.save(bebida);
-                    return ResponseEntity.ok().body(bebidaSalva);
-                }).orElse( ResponseEntity.notFound().build());
+                    return bebidaRepository.save(bebida);
+                }).orElse(null);
     }
 
     private Optional<Bebida> getById(long id) {
         return bebidaRepository.findById(id);
     }
 
-    public MessageResponseDTO delete(long id) {
+    public boolean delete(long id) {
         return bebidaRepository.findById(id)
                 .map(bebida -> {
                     bebidaRepository.deleteById(id);
-                    return MessageResponseDTO.builder().message("Bebida com id " + id + " foi deletada!").build();
-                }).orElse(MessageResponseDTO.builder().message("Nao foi encontrada nenhuma bebida com id " + id).build());
+                    return true;
+                }).orElse( false );
     }
 }
