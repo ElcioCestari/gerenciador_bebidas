@@ -53,4 +53,9 @@ public class BebidaController{
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/volume")
+    public ResponseEntity getVolumeDeBebidas(){
+        return ResponseEntity.ok(bebidaService.getVolumeDeBebidas());
+    }
 }

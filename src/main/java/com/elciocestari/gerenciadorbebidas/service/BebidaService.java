@@ -1,16 +1,15 @@
 package com.elciocestari.gerenciadorbebidas.service;
 
 import com.elciocestari.gerenciadorbebidas.dto.BebidaDTO;
-import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.mapper.BebidaMapper;
 import com.elciocestari.gerenciadorbebidas.repository.BebidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.stream.Stream;
 
 @Service
 public class BebidaService {
@@ -51,5 +50,14 @@ public class BebidaService {
                     bebidaRepository.deleteById(id);
                     return true;
                 }).orElse( false );
+    }
+
+    public Double getVolumeDeBebidas() {
+        Double volume = this.getAll()
+                .stream()
+                .map(bebida -> bebida.getVolume())
+                .reduce(0.0, (atual, prox) -> atual + prox);
+
+        return volume;
     }
 }

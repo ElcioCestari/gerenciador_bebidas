@@ -1,7 +1,7 @@
 package com.elciocestari.gerenciadorbebidas.service;
 
-import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.dto.SecaoDTO;
+import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.entity.Secao;
 import com.elciocestari.gerenciadorbebidas.exception.NumeroMaximoDeSecaoException;
 import com.elciocestari.gerenciadorbebidas.mapper.SecaoMapper;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SecaoService {
@@ -18,7 +17,7 @@ public class SecaoService {
     private SecaoRepository secaoRepository;
     private SecaoMapper secaoMapper = SecaoMapper.INSTANCE;
 
-    private static final int  NUMERO_MAXIMO_SECAO = 5;
+    private static final int NUMERO_MAXIMO_SECAO = 5;
 
     @Autowired
     public SecaoService(SecaoRepository secaoRepository) {
@@ -41,11 +40,11 @@ public class SecaoService {
 
     public Secao update(SecaoDTO secaoDTO, long id) {
         return secaoRepository.findById(id)
-                        .map(secao -> {
-                            secao = secaoMapper.toModel(secaoDTO);
-                            secao.setId(id);
-                            return secaoRepository.save(secao);
-                        }).orElse(null);
+                .map(secao -> {
+                    secao = secaoMapper.toModel(secaoDTO);
+                    secao.setId(id);
+                    return secaoRepository.save(secao);
+                }).orElse(null);
 
     }
 
@@ -55,5 +54,18 @@ public class SecaoService {
                     secaoRepository.deleteById(id);
                     return true;
                 }).orElse(false);
+    }
+
+    public Double getVolume(long id) {
+        List<Secao> list = this.getAll();
+        Double volume = 0.0;
+
+        for (Secao secao : list) {
+            if (id == secao.getId())
+            for (Bebida bebida : secao.getBebida()) {
+                volume += bebida.getVolume();
+            }
+        }
+        return volume;
     }
 }

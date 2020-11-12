@@ -46,6 +46,12 @@ public class SecaoController {
                 ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/volume/{id}")
+    public ResponseEntity getVolume( @PathVariable long id ){
+        return ResponseEntity.ok( secaoService.getVolume(id) );
+
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable long id) {
         Secao secaoUdpated = secaoService.update(secaoDTO, id);

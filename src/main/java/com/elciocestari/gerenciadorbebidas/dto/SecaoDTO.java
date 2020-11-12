@@ -22,9 +22,6 @@ public class SecaoDTO {
     @NotBlank
     private String nome;
 
-    @NotNull
-    private Double volume;
-
     @Valid
     private List<BebidaDTO> bebida;
 

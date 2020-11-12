@@ -30,7 +30,6 @@ public class SecaoServiceTest {
         secaoDTO = SecaoDTO.builder()
                 .bebida(dtoList)
                 .nome("Secao A")
-                .volume(200.00)
                 .build();
     }
 

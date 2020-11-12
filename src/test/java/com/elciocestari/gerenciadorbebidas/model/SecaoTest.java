@@ -29,7 +29,6 @@ public class SecaoTest {
 
         secao = Secao.builder()
                 .nome("A")
-                .volume(200.00)
 //                .bebidas(bebida)
                 .build();
 
