@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Parameter;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +12,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * Entidade que representa as seções onde serão armazenadas as bebidas
+ */
 public class Secao {
 
     @Id

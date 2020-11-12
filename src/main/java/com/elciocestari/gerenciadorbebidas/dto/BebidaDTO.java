@@ -13,6 +13,9 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * Fará a validação dos campos que serao inseridos na entidade de mesmo nome
+ */
 public class BebidaDTO {
 
     private Long id;

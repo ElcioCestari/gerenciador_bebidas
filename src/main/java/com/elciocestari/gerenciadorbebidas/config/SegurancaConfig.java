@@ -13,6 +13,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableWebSecurity
 @EnableAuthorizationServer
 @EnableResourceServer
+
+/**
+ * Faz o gerenciamento da autenticacao.
+ */
 public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 
     private static final String USER = "admin";

@@ -12,6 +12,10 @@ import java.util.OptionalDouble;
 import java.util.stream.Stream;
 
 @Service
+
+/**
+ * Responsável por fazer a comunicação entre o controle e as classes de model.
+ */
 public class BebidaService {
 
     private BebidaRepository bebidaRepository;
@@ -23,6 +27,7 @@ public class BebidaService {
         this.bebidaRepository = bebidaRepository;
     }
 
+    //TODO VER O QUE ACONTECE QUANDO CRIA UMA BEBIDA INVALIDA
     public Bebida create(BebidaDTO bebidaDTO) {
         Bebida bebidaParaSalvar = bebidaMapper.toModel(bebidaDTO);
 
@@ -31,10 +36,21 @@ public class BebidaService {
         return bebidaSalva;
     }
 
+    /**
+     *
+     * @return List<Bebida> contentdo todas bebidas.
+     */
     public List<Bebida> getAll() {
         return bebidaRepository.findAll();
     }
 
+
+    /**
+     *
+     * @param id - id da Bebida
+     * @param bebidaDTO - BebidaDTO contendo os dados para serem atualizados
+     * @return - Bebida com os Dados atualizados ou null caso nao sejam atualizados
+     */
     public Bebida update(long id, BebidaDTO bebidaDTO) {
         return bebidaRepository.findById(id)
                 .map(bebida -> {
@@ -44,6 +60,11 @@ public class BebidaService {
                 }).orElse(null);
     }
 
+    /**
+     * delete uma Bebida
+     * @param id - id representa uma Bebida
+     * @return - true se a bebida foi delatada e false caso contrario
+     */
     public boolean delete(long id) {
         return bebidaRepository.findById(id)
                 .map(bebida -> {
@@ -51,6 +72,12 @@ public class BebidaService {
                     return true;
                 }).orElse( false );
     }
+
+
+    /**
+     * soma o volume de todas as bebidas no banco
+     * @return - Double
+     */
 
     public Double getVolumeDeBebidas() {
         Double volume = this.getAll()
