@@ -1,15 +1,12 @@
 package com.elciocestari.gerenciadorbebidas.controller;
 
 import com.elciocestari.gerenciadorbebidas.dto.BebidaDTO;
-import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/api/v1/bebida")
@@ -48,7 +45,7 @@ public class BebidaController{
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete( long id) {
+    public ResponseEntity delete( @PathVariable long id) {
         return bebidaService.delete(id) ?
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();

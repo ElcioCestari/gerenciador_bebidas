@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Bebida {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -31,4 +31,10 @@ public class Bebida {
 
     @Column(nullable = false)
     private String tipo;
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "secao_id", insertable = true, updatable = true
+    )*/
+    //private Secao secao;
 }

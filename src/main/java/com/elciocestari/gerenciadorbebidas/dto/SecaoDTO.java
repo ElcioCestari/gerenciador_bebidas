@@ -24,5 +24,4 @@ public class SecaoDTO {
 
     @Valid
     private List<BebidaDTO> bebida;
-
 }

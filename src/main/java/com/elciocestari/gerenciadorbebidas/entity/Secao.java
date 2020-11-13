@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  */
 public class Secao {
 
+    @Column(name = "secao_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +26,6 @@ public class Secao {
     @Column(nullable = false, unique = true)
     private String nome;
 
-    @OneToMany(fetch =  FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE} )
-    @JoinColumn(name = "bebida_id")
+    @OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Bebida> bebida;
 }

@@ -1,5 +1,6 @@
 package com.elciocestari.gerenciadorbebidas.dto;
 
+import com.elciocestari.gerenciadorbebidas.entity.Secao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,6 @@ public class BebidaDTO {
     @NotNull
     private Double volume;
 
-    @NotNull
     @NotBlank
     private String tipo;
 

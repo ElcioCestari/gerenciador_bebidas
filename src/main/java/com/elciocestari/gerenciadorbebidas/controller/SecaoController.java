@@ -4,7 +4,10 @@ import com.elciocestari.gerenciadorbebidas.dto.MessageResponseDTO;
 import com.elciocestari.gerenciadorbebidas.dto.SecaoDTO;
 import com.elciocestari.gerenciadorbebidas.entity.Bebida;
 import com.elciocestari.gerenciadorbebidas.entity.Secao;
+import com.elciocestari.gerenciadorbebidas.exception.BebidasDiferentesException;
 import com.elciocestari.gerenciadorbebidas.exception.NumeroMaximoDeSecaoException;
+import com.elciocestari.gerenciadorbebidas.exception.TipoDeBebidaException;
+import com.elciocestari.gerenciadorbebidas.exception.VolumeMaximoDeBebidaAlcoolicaException;
 import com.elciocestari.gerenciadorbebidas.mapper.BebidaMapper;
 import com.elciocestari.gerenciadorbebidas.mapper.SecaoMapper;
 import com.elciocestari.gerenciadorbebidas.repository.SecaoRepository;
@@ -32,7 +35,10 @@ public class SecaoController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody @Valid SecaoDTO secaoDTO) throws NumeroMaximoDeSecaoException {
+    public ResponseEntity save(@RequestBody @Valid SecaoDTO secaoDTO)
+            throws NumeroMaximoDeSecaoException, VolumeMaximoDeBebidaAlcoolicaException,
+            BebidasDiferentesException, TipoDeBebidaException {
+
         Secao secaoSalva = secaoService.create(secaoDTO);
 
         return ResponseEntity.ok(secaoSalva);
@@ -46,10 +52,9 @@ public class SecaoController {
                 ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/volume/{id}")
+    @GetMapping("/{id}/volume")
     public ResponseEntity getVolume( @PathVariable long id ){
         return ResponseEntity.ok( secaoService.getVolume(id) );
-
     }
 
     @PutMapping(value = "/{id}")
@@ -66,5 +71,10 @@ public class SecaoController {
         return secaoService.delete(id) ?
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/teste")
+    public ResponseEntity teste(){
+        return ResponseEntity.ok(this.secaoService.test(1));
     }
 }
